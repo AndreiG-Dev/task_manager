@@ -19,7 +19,7 @@ public class UserDAO {
 
     public static void createUser(User user){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
             String currentLine;
 
@@ -41,7 +41,7 @@ public class UserDAO {
 
             stringBuffer.append(userData);
 
-            FileOutputStream fileOutputStream = new FileOutputStream("dataFile.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream("src/main/dataFile.csv");
             fileOutputStream.write(stringBuffer.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
 
@@ -58,7 +58,7 @@ public class UserDAO {
         List<User> result = new ArrayList<>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentLine;
@@ -80,7 +80,7 @@ public class UserDAO {
 
     public static void assignTask(String userName, Task task) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentUserLine = null;
@@ -110,7 +110,7 @@ public class UserDAO {
                 stringBuffer.append(currentUserLine + "Tasks: " + taskInfo);
             }
 
-            FileOutputStream fileOutputStream = new FileOutputStream("dataFile.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream("src/main/dataFile.csv");
             fileOutputStream.write(stringBuffer.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
 
@@ -127,7 +127,7 @@ public class UserDAO {
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentLine;
