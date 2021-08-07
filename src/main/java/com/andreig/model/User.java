@@ -1,9 +1,16 @@
 package com.andreig.model;
 
+
+import java.util.List;
+
 public class User {
     private String firstName;
     private String lastName;
     private String userName;
+    private List<Task> taskList;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName, String userName) {
         this.firstName = firstName;
@@ -33,5 +40,18 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public List<Task> getTaskList() {
+        return taskList;
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
+    }
+
+    public String toString(){
+        return "First name: " + getFirstName() + "\n Last name: " + getLastName() +
+                "\n User name: " + getUserName();
     }
 }
