@@ -6,7 +6,6 @@ import com.andreig.model.User;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class UserDAO {
@@ -156,6 +155,13 @@ public class UserDAO {
     }
 
     public static void main(String[] args) {
+        User user = new User("f","fd", "fd");
+        createUser(user);
 
+        for (int i = 1; i <6; i++){
+            Task task = new Task("Task"+i, "Description" + i);
+            assignTask("fd", task);
+        }
+        System.out.println(getUserTasks("fd").toString());
     }
 }
