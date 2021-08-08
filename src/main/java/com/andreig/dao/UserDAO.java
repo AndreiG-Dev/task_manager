@@ -16,9 +16,10 @@ public class UserDAO {
     private final static String TASK_ASSIGNED = "Task has been assigned to user %s \n";
     private final static String NO_TASKS_FOUND = "User name %s doesn't have any tasks assigned \n";
 
-    public static void createUser(User user){
+
+    public void createUser(User user){
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
             String currentLine;
 
@@ -40,7 +41,7 @@ public class UserDAO {
 
             stringBuffer.append(userData);
 
-            FileOutputStream fileOutputStream = new FileOutputStream("src/main/dataFile.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream("dataFile.csv");
             fileOutputStream.write(stringBuffer.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
 
@@ -53,11 +54,11 @@ public class UserDAO {
         }
     }
 
-    public static List<User> showAllUsers(){
+    public List<User> showAllUsers(){
         List<User> result = new ArrayList<>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentLine;
@@ -77,9 +78,9 @@ public class UserDAO {
         return result;
     }
 
-    public static void assignTask(String userName, Task task) {
+    public void assignTask(String userName, Task task) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentUserLine = null;
@@ -109,7 +110,7 @@ public class UserDAO {
                 stringBuffer.append(currentUserLine + "Tasks: " + taskInfo);
             }
 
-            FileOutputStream fileOutputStream = new FileOutputStream("src/main/dataFile.csv");
+            FileOutputStream fileOutputStream = new FileOutputStream("dataFile.csv");
             fileOutputStream.write(stringBuffer.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
 
@@ -122,11 +123,11 @@ public class UserDAO {
         }
     }
 
-    public static List<Task> getUserTasks(String userName){
+    public List<Task> getUserTasks(String userName){
         ArrayList<Task> tasks = new ArrayList<>();
 
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/dataFile.csv"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
             StringBuffer stringBuffer = new StringBuffer();
 
             String currentLine;
@@ -146,6 +147,7 @@ public class UserDAO {
                 }
             }
             bufferedReader.close();
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -155,13 +157,10 @@ public class UserDAO {
     }
 
     public static void main(String[] args) {
-        User user = new User("f","fd", "fd");
-        createUser(user);
+        User user = new User("Bilbo", "Baggins", "TheRingOwner137");
+        UserDAO userDAO = new UserDAO();
+        //userDAO.createUser(user);
 
-        for (int i = 1; i <6; i++){
-            Task task = new Task("Task"+i, "Description" + i);
-            assignTask("fd", task);
-        }
-        System.out.println(getUserTasks("fd").toString());
+        userDAO.showAllUsers();
     }
 }
