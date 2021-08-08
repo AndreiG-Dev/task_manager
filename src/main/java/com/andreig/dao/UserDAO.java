@@ -8,19 +8,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO {
+public class UserDAO implements UserDAOService {
 
-    private final static String ALREADY_EXISTS = "Such user name already exists";
-    private final static String USER_ADDED = "User has been successfully added";
-    private final static String USER_NOT_FOUND = "Such user name not found";
-    private final static String TASK_ASSIGNED = "Task has been assigned to user %s \n";
-    private final static String NO_TASKS_FOUND = "User name %s doesn't have any tasks assigned \n";
-
-
+    @Override
     public void createUser(User user){
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
-            StringBuffer stringBuffer = new StringBuffer();
+            StringBuilder stringBuilder = new StringBuilder();
             String currentLine;
 
             while((currentLine = bufferedReader.readLine()) != null) {
@@ -30,19 +24,23 @@ public class UserDAO {
                     return;
 
                 }
-                stringBuffer.append(currentLine + '\n');
+                stringBuilder.append(currentLine);
+                stringBuilder.append('\n');
             }
             bufferedReader.close();
 
             StringBuilder userData = new StringBuilder();
-            userData.append(user.getFirstName() + ", ");
-            userData.append(user.getLastName() + ", ");
-            userData.append(user.getUserName()+ ", ");
+            userData.append(user.getFirstName());
+            userData.append(", ");
+            userData.append(user.getLastName());
+            userData.append(", ");
+            userData.append(user.getUserName());
+            userData.append(", ");
 
-            stringBuffer.append(userData);
+            stringBuilder.append(userData);
 
             FileOutputStream fileOutputStream = new FileOutputStream("dataFile.csv");
-            fileOutputStream.write(stringBuffer.toString().getBytes(StandardCharsets.UTF_8));
+            fileOutputStream.write(stringBuilder.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.close();
 
             System.out.println(USER_ADDED);
@@ -54,6 +52,7 @@ public class UserDAO {
         }
     }
 
+    @Override
     public List<User> showAllUsers(){
         List<User> result = new ArrayList<>();
 
@@ -78,6 +77,7 @@ public class UserDAO {
         return result;
     }
 
+    @Override
     public void assignTask(String userName, Task task) {
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("dataFile.csv"));
@@ -123,6 +123,7 @@ public class UserDAO {
         }
     }
 
+    @Override
     public List<Task> getUserTasks(String userName){
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -156,11 +157,4 @@ public class UserDAO {
         return tasks;
     }
 
-    public static void main(String[] args) {
-        User user = new User("Bilbo", "Baggins", "TheRingOwner137");
-        UserDAO userDAO = new UserDAO();
-        //userDAO.createUser(user);
-
-        userDAO.showAllUsers();
-    }
 }

@@ -7,7 +7,6 @@ public class User {
     private String firstName;
     private String lastName;
     private String userName;
-    private List<Task> taskList;
 
     public User() {
     }
@@ -42,13 +41,6 @@ public class User {
         this.userName = userName;
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
-    }
-
-    public void setTaskList(List<Task> taskList) {
-        this.taskList = taskList;
-    }
 
     public String toString(){
         return "First name: " + getFirstName() + "\n Last name: " + getLastName() +

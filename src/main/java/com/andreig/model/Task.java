@@ -28,7 +28,7 @@ public class Task {
         this.description = description;
     }
 
-    public String toString(){
-        return title +  "\n" + description + "\n -------------";
+    public String toString() {
+        return title + "\n" + description + "\n -------------";
     }
 }
